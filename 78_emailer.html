@@ -1,0 +1,79 @@
+
+<title>How to send personalized emails | Derek Sivers</title>
+
+
+<article class="post">
+
+<header class="wrapper">
+<h1 id="post-208"><a href="/emailer">How to send personalized emails</a></h1>
+<p class="postdate">2009-08-31</p>
+</header>
+
+<div class="body-content entry wrapper">
+<p>
+I think the single most common question I've been asked over the years is “<strong>What do you use to send out your personalized emails?</strong>”
+</p><p>
+It's <strong>a short little PHP script, run on the command-line, directly on your webserver</strong>.  The script and simple instructions are below.
+</p><p>
+Sorry I can't play tech-support for everyone, so for anything here you don't understand yet, please ask your web-hosting company how to do this for your site. (This page is at <strong><a href="http://sivers.org/emailer">sivers.org/emailer</a></strong>.)
+</p>
+
+
+<h2>1. Keep your list in a spreadsheet</h2>
+<p>
+It's important that you do it with <strong>email address in column A</strong> and <strong>name in column B</strong> like this:
+<br /><img src="http://sivers.org/images/wonkakids.png" width="317" height="114" alt="spreadsheet" />
+</p>
+
+<h2>2. Save as tab-delimited text</h2>
+<p>
+Under “Save As...”, every spreadsheet program has an option to save as plain text, with the columns separated with a “tab” character. For this example, <strong>name it list.txt</strong>.  Upload it to your server.
+</p>
+
+<h2>3. Here's the PHP script that does it</h2>
+<pre>
+&lt;?php
+$from = &quot;Willy Wonka &lt;willy@wonka.com&gt;&quot;;
+foreach(file('list.txt') as $line)
+    {
+    list($email, $name) = explode(&quot;\t&quot;, $line);
+    list($firstname) = explode(' ', $name);
+    $subject = &quot;Hi $firstname! The chocolate is all yours.&quot;;
+    $body = &quot;Hi $firstname - 
+
+Those other kids are awful. You deserve it all. Come and get it.
+
+--
+Willy Wonka - willy@wonka.com - http://wonka.com
+&quot;;
+    mail($email, $subject, $body, $from);
+    print &quot;$email sent\n&quot;;
+    }
+?&gt;
+</pre>
+<p><strong>Look at it slowly</strong>, even if you don't know PHP. It's pretty self-explanatory.</p>
+<ol>
+<li>It goes through each line of your list.txt file</li>
+<li>Breaks each line into $email and $name, separated by tab (\t)</li>
+<li>Breaks the name into words, taking the first one as $firstname</li>
+<li>Merges $firstname into the subject and body of the mail</li>
+<li>Emails it, using the customized $email, $subject and $body</li>
+</ol>
+<p>Obviously, <strong>replace the $from, $subject, and $body</strong> for your own needs. Save it as <strong>mailer.php</strong>. Then upload it to your server.</p>
+
+<h2>4. Log in to the command-line on your server</h2>
+<p>
+This is the part your web-hosting company will have to tell you how to do. Using <a href="http://www.osxterminal.com/">Terminal</a> on Mac, or <a href="http://www.chiark.greenend.org.uk/~sgtatham/putty/">PuTTY</a> on Windows, SSH into your server's command-line.
+</p>
+
+<h2>5. Run it!</h2>
+<p>
+On the command-line, where the <strong>mailer.php</strong> and <strong>list.txt</strong> files are, just type:<pre><strong>php mailer.php
+</strong></pre>
+... and everyone will be sent a customized email.
+</p>
+</div>
+
+
+
+</article>

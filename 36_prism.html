@@ -1,0 +1,102 @@
+
+<title>Big catalog = infinite specialty shops | Derek Sivers</title>
+
+
+<article class="post">
+
+<header class="wrapper">
+<h1 id="post-1880"><a href="/prism">Big catalog = infinite specialty shops</a></h1>
+<p class="postdate">2010-01-26</p>
+</header>
+
+<div class="body-content entry wrapper">
+<p>
+<em>Here's an idea I built but never launched at CD Baby.  Maybe you can take it and use it somehow.</em>
+</p><p>
+<strong>How do you call attention to over 250,000 albums of music, so that each has a chance of being noticed by someone who might like it?</strong>
+</p><p>
+They're categorized into 850 different musical genres, and the artists are from 300 different countries and states.
+</p><p>
+You break it down into categories, right?
+</p><p>
+But then people still have to start at a big generic front door, listing every possible genre or location.  Not exciting.
+</p><p>
+If you're a huge fan of Brazilian funk music, wouldn't you be more excited to find a shop that specialized in Brazilian funk?
+</p><p>
+If you only love Gospel, wouldn't you feel better browsing a site that only carries Gospel from around the world?
+</p><p>
+If you live in Italy, wouldn't it be cool to explore a music store of independent musicians from Italy?
+</p><p>
+Finding a kindred specialist in your niche is way more exciting than another generalist.
+</p><p>
+So what if you could <strong>break down this big catalog of 250,000 albums into a thousand little specialty shops</strong>?
+</p><p>
+Difficult and expensive in the physical world.  Easy and cheap in the digital world.  Here's how:
+</p>
+<h3>Database limiting</h3>
+<p>
+On the back-end tech side, the database of albums already uses a simple language called SQL to select what you want:
+</p>
+<dl>
+<dt>All albums:</dt>
+<dd class="small">SELECT * FROM albums</dd>
+<dt>Albums from Brazil</dt>
+<dd class="small">SELECT * FROM albums WHERE location='BR'</dd>
+<dt>Albums that are Gospel</dt>
+<dd class="small">SELECT * FROM albums WHERE genre='Gospel'</dd>
+<dt>Albums that are Gospel from Brazil</dt>
+<dd class="small">SELECT * FROM albums WHERE genre='Gospel' AND location='BR'</dd>
+</dl>
+<p>
+See how easy it is?  Notice how the only difference is what comes after the WHERE command?
+</p>
+<h3>1000 domain names</h3>
+<p>
+It's cheap and easy to register a thousand domain names like BrazilianFunk.com, WorldwideGospel.com, and ItalianIndies.com
+</p><p>
+Point them all at the same webserver (the web-store with the full database of all albums) - that knows which domain name the customer is using, and can adapt accordingly.
+</p>
+<h3>CSS design</h3>
+<p>
+Using <a href="http://csszengarden.com/">CSS</a>, you don't need to change the HTML to change the design.  Just that one simple CSS file.
+</p><p>
+For example, click around <a href="http://musicthoughts.com/">musicthoughts.com</a> then go to <a href="http://musicthoughts.com/style">musicthoughts.com/style</a> to click a different style like [levi] or [luke], then browse around again.  The HTML didn't change - only a single CSS file.
+</p>
+<h3>Map domains to limiting + design = voila!</h3>
+<p>
+Map each incoming domain to a CSS file and database limiter, and you have a specialty shop!
+</p><p>
+<strong>Putting it all together:</strong>
+</p>
+<ol>
+<li>Register a domain like BrazilianFunk.com, pointing at your main webserver</li>
+<li>Tweak your design to a BrazilianFunk.css style, say green and yellow with a “Brazilian Funk” logo.</li>
+<li>Map it to a database limiter like “WHERE genre='Funk' AND location='BR'” that is added to all SELECT queries.</li>
+<li>When someone goes to BrazilianFunk.com, they get your same site, but showing only Funk from Brazil, with the tweaked design.</li>
+</ol>
+<p>
+<strong>You now have a small specialty shop for Brazilian funk, and it only cost $10 plus an hour of time to make.</strong>
+</p><p>
+Repeat steps 1-3 for each worthy genre or location.
+</p><p>
+From the customer's point of view, <strong>it's much easier to discover new music in a specialty shop like this.  All “New Arrivals” and “Editor's Picks” and “Top Sellers” charts only show albums in that niche.</strong>
+</p><p>
+From a <strong>marketing</strong> point of view, it opens up all kinds of avenues to reach niche music organizations like Folk Alliance or the Japanese Music Exporters' league or whatever.  In fact it'd be easy to make a specialty shop for each of them, featuring only their members.  (A database limiter like “WHERE affiliation='folkalliance'”)
+</p>
+<h3>Last benefit: reaching niche musicians</h3>
+<p>
+Now imagine you're a jazz musician in Sweden, and you come across a store called SwedishJazz.com.  It's filled with 100 jazz musicians from Sweden but your album is not there!  You'd have to get on it!
+</p><p>
+Whereas you wouldn't have been so inspired to get your album selling in a big generic store, you do go to the trouble to sell your music through this niche store, which of course adds your music into the main central database that powers them all, including the original big store that carries everything, for those that are not niche shoppers.
+</p><p>
+<em>(I hope this helps. If you get inspired by or make something like this, please let me know.)</em>
+</p>
+<img src="http://sivers.org/images/prism.jpg" width="500" height="375" alt="http://www.flickr.com/photos/7931817@N02/2215475641/" />
+</div>
+
+<footer class="wrapper">
+<small class="postmetadata alt">
+© 2010 <a href="http://sivers.org/">Derek Sivers</a></small>
+</footer>
+
+</article>
